@@ -9,10 +9,14 @@ int main() {
     cout << "=== Masukkan Credentials ===" << endl;
     do {
         cout << "\nMasukkan Username: ";
-        cin >> usernameInput;
+        getline(cin, usernameInput);
         cout << "Masukkan Password: ";
-        cin >> passwordInput;
-    } while (usernameInput != username && passwordInput != password);
+        getline(cin, passwordInput);
+
+        if (username != usernameInput || password != passwordInput) {
+            cout << "Coba lagi!" << endl;
+        }
+    } while (username != usernameInput || password != passwordInput);
     cout << "\nAnda Berhasil Login";
     
 
