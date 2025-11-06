@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void konversi(int bilangan, int *jam, int *menit, int *detik);
+int konversi(int bilangan, int *jam, int *menit, int *detik);
 
 int main() {
     int bilangan, jam, menit, detik;
@@ -17,7 +17,7 @@ int main() {
 }
 
 
-void konversi(int bilangan, int *jam, int *menit, int *detik) {
+int konversi(int bilangan, int *jam, int *menit, int *detik) {
     int sisa;
 
     // jam konversi
