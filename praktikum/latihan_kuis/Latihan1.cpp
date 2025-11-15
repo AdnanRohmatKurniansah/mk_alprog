@@ -6,7 +6,7 @@ int main() {
 	string username = "admin";
 	string password = "12345";
 	string voucher = "abcd";
-	
+		
 	string userInput, passInput, voucherInput;
 	int opsiMenu, pilihProduk, jml_produk, harga_produk, subTotal;
 	float diskon;
