@@ -1,85 +1,210 @@
 #include <iostream>
+
 using namespace std;
 
-int main(){
-    bool member = false, ulang = false;
-    int pill, jml;
-    string nama;
-    int jmlmember = 10;
-    string membership[jmlmember] = {"andi", "budi", "siti"};
-    int poin[jmlmember] = {20, 40, 50};
-    string menu[7] = {"Kopi Hitam", "Cappuccino", "Teh Manis", "Nasi Goreng", "Mie Goreng", "Sosis Bakar", "Roti Bakar"};
-    int harga[7] = {10000, 18000, 8000, 20000, 18000, 12000, 15000};
-    int histori[20];
+void daftarBuku(string buku[5], string statusBuku[5]);
+void pinjamBuku(string peminjam[5], int lamaPinjam[5], string buku[5], string statusBuku[5]);
+void prosesPinjam(string peminjam[5], int lamaPinjam[5], int opsiBuku, string namaPeminjam, int lama, string statusBuku[5]);
+void kembalikanBuku(string peminjam[5], int lamaPinjam[5], string buku[5], string statusBuku[5]);
 
-    int totalharga, jumlahhistori, jumlahmember, memberindex;
+void kembaliMenu();
 
-    cout << "cafe ko" << endl;
-    cout << "masukkan nama anda " ;
-    cin >> nama;
+bool ulang = false;
 
-    for(int i = 0; i < jmlmember; i++){
-        if(nama == membership[i]){
-            member = true;
-            memberindex = i;
-            break;
+int main() {
+    string username = "admin";
+	string password = "12345";
+
+    string userInput, passInput;
+    int opsiMenu;
+
+    string buku[5] = {
+        "Laut Bercerita", 
+        "Look Back", 
+        "Namaku Alam", 
+        "Filosofi Teras", 
+        "Bandung After Rain"
+    };
+
+    string statusBuku[5] = {
+        "Tersedia",
+        "Tersedia",
+        "Tersedia",
+        "Tersedia",
+        "Tersedia"
+    };
+
+    string peminjam[5];
+    int lamaPinjam[5];
+    int opsiBuku;
+
+    do {
+		cout << "=== Login Petugas ===" << endl;
+		cout << "Username: ";
+		getline(cin, userInput);
+		cout << "Password: ";
+		getline(cin, passInput);
+		
+		if (userInput == username && passInput == password) {
+			ulang = false;
+		} else {
+			ulang = true;
+			system("cls");
+			cout << "Credentials tdk valid...\n" << endl;
+		}
+	} while (ulang == true);
+
+    system("cls");
+	cout << "Login Berhasil...\n" << endl;
+	system("pause");
+	system("cls");
+
+    do {
+		cout << "=== Perpus ===" << endl;
+        cout << "1. Daftar Buku" << endl;
+		cout << "2. Pinjam Buku" << endl;
+		cout << "3. Kembalikan Buku" << endl;
+		cout << "4. Keluar" << endl;
+		cout << "Pilih Opsi: ";
+		cin >> opsiMenu;
+
+        switch (opsiMenu) {
+            case 1:
+                system("cls");
+				ulang = false;
+
+                daftarBuku(buku, statusBuku); 
+                kembaliMenu();
+                break;
+            case 2:
+                system("cls");
+				ulang = false;
+
+                pinjamBuku(peminjam, lamaPinjam, buku, statusBuku);
+                break;
+            case 3:
+                system("cls");
+				ulang = false;
+
+                kembalikanBuku(peminjam, lamaPinjam, buku, statusBuku);
+                break;
+            case 4:
+                ulang = false;
+				system("cls");
+				cout << "\nTelah keluar dari program...\n" << endl;
+				exit(0);
+                break;
+            default:
+                ulang = true;
+                system("cls");
+                cout << "Menu tdk tersedia, Ulangi...\n" << endl;
+                break;
         }
-    }
-    if(member){
-        cout << "anda merupakan member, poin anda " << poin[memberindex] << endl;
-    } else {
-        cout << "anda bukan member" << endl;
-    }
 
-    cout << "=== MENU KAFE ===\n";
-    for(int i = 0; i < 7; i++){
-        cout << i+1 << ". " << menu[i] << " - Rp" << harga[i] << endl;
-    }
-   cout << "\nPilih menu (0 untuk selesai): \n";
-    while(true){
-        cout << "Pilih nomor menu: ";
-        cin >> pill;
+    } while (ulang == true);
 
-        if(pill == 0) break;  
-        if(pill < 1 || pill > 7){
-            cout << "Menu tidak tersedia!\n";
-            continue;
+    return 0;
+}
+
+void kembaliMenu() {
+	char kembali;
+
+    cout << "\nKembali ke menu utama? (Y/N): ";
+	cin >> kembali;
+				
+    if (kembali == 'y' || kembali == 'Y') {
+		ulang = true;
+		system("cls");
+	} else {
+		system("cls");
+		cout << "\nTelah keluar dari program...\n" << endl;
+		exit(0);
+	}
+}
+
+void daftarBuku(string buku[5], string statusBuku[5]) {
+    cout << "=== Daftar Buku ===" << endl;
+    for (int i = 0; i < 5; i++) {
+        cout << i+1 << ". " << buku[i] << " | " << statusBuku[i] << endl;
+    }
+}
+
+void pinjamBuku(string peminjam[5], int lamaPinjam[5], string buku[5], string statusBuku[5]) {
+    string namaPeminjam;
+    int opsiBuku, lama;
+
+    do {
+        daftarBuku(buku, statusBuku);
+        cout << "\n=== Info Peminjam ===" << endl;
+        cout << "Masukkan Nama: ";
+        cin.ignore();
+        getline(cin, namaPeminjam);
+        cout << "Lama Pinjam (Hari): ";
+        cin >> lama;
+
+        if (lama <= 0) {
+            ulang = true;
+		    system("cls");
+            cout << "Input lama pinjam harus valid(tdk minus/0)\n";
         }
 
-        cout << "Jumlah: ";
-        cin >> jml;
+        cout << "Pilih buku: ";
+        cin >> opsiBuku;
 
-        int subtotal = harga[pill - 1] * jml;
-        totalharga += subtotal;
-        histori[jumlahhistori] = subtotal;
-        jumlahhistori++;
+        if (opsiBuku >= 1 && opsiBuku <= 5) {
+            ulang = false;
+            prosesPinjam(peminjam, lamaPinjam, opsiBuku, namaPeminjam, lama, statusBuku);
+        } else {
+            ulang = true;
+            system("cls");
+            cout << "Input sesuai opsi buku yg tersedia...\n";
+        }
+    } while (ulang == true);
 
-        cout << "Ditambahkan ke pesanan!\n";
-    }
+    kembaliMenu();
+}
 
-    float diskon = 0;
-    int tambahpoin = 0;
-    
-    if(member){
-        diskon = totalharga*0.15;
-        tambahpoin = totalharga/10000;
-        poin[memberindex] += tambahpoin; 
-    }
-    float totalakhir = totalharga - diskon;
-    cout << "\nRincian pesanan:\n";
-
-    for(int i = 0; i < jumlahhistori; i++){
-        cout << "- Item " << i+1 << ": Rp" << histori[i] << endl;
-    }
-
-    cout << "\nTotal Belanja : Rp" << totalharga << endl;
-    cout << "Diskon        : Rp" << diskon << endl;
-    cout << "Total Akhir   : Rp" << totalakhir << endl;
-
-    if(member){
-        cout << "Poin Didapat  : " << tambahpoin << endl;
-        cout << "Total Poin    : " << poin[memberindex] << endl;
+void prosesPinjam(string peminjam[5], int lamaPinjam[5], int opsiBuku, string namaPeminjam, int lama, string statusBuku[5]) {
+    if (statusBuku[opsiBuku - 1] == "Dipinjam") {
+        cout << "\nBuku sedang dipinjam orang lain..." << endl;
     } else {
-        cout << "Poin Didapat  : 0 (bukan member)\n";
+        peminjam[opsiBuku - 1] = namaPeminjam;
+        lamaPinjam[opsiBuku - 1] = lama;
+        statusBuku[opsiBuku - 1] = "Dipinjam";
+
+        cout << "\nBuku berhasil dipinjam..." << endl;
     }
+}
+
+void kembalikanBuku(string peminjam[5], int lamaPinjam[5], string buku[5], string statusBuku[5]) {
+    int opsiBuku;
+
+    do {
+        daftarBuku(buku, statusBuku);
+        cout << "\nPilih buku yang ingin dikembalikan: ";
+        cin >> opsiBuku;
+
+        if (opsiBuku >= 1 && opsiBuku <= 5) {
+            ulang = false;
+            if (statusBuku[opsiBuku - 1] == "Tersedia") {
+                cout << "\nBuku masih tersedia..." << endl;
+            } else {
+                cout << "\n=== Detail Pengembalian ===" << endl;
+                cout << "Buku        : " << buku[opsiBuku - 1] << endl;
+                cout << "Peminjam    : " << peminjam[opsiBuku - 1] << endl;
+                cout << "Lama Pinjam : " << lamaPinjam[opsiBuku - 1] << " hari" << endl;
+
+                peminjam[opsiBuku - 1] = "";
+                lamaPinjam[opsiBuku - 1] = 0;
+                statusBuku[opsiBuku - 1] = "Tersedia";
+                cout << "\nBuku berhasil dikembalikan..." << endl;
+            }
+        } else {
+            ulang = true;
+            system("cls");
+            cout << "Input sesuai opsi buku yg tersedia...\n";
+        }
+    } while (ulang == true);
+
+    kembaliMenu();
 }
