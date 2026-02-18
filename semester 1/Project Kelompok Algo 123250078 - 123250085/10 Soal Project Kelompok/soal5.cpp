@@ -13,7 +13,7 @@ int main(){
     return 0;
 }
 
-void banyakpecahan(long uang, long pecahan[]){
+void banyakpecahan(long uang, long pecahan[]) {
     int lembar;
     for(int i; i < 9; i++){
         lembar = uang/pecahan[i];
@@ -21,6 +21,5 @@ void banyakpecahan(long uang, long pecahan[]){
             cout << "Rp " << pecahan[i] << " : " << lembar << " lembar" << endl;
             uang = uang % pecahan[i];
         }
-       
     }
 }

@@ -45,7 +45,6 @@ int main(){
 
         harga = total(hargaperkg, jml);
 
-        total(hargaperkg, jml);
         if(jml >=5){
             do{
                 cout << "apakah menggunakan diskon ";
@@ -54,7 +53,7 @@ int main(){
                     cout << "diskon berapa persen : ";
                     cin >> diskon;
                     harga = promo(harga, diskon);
-                } else if(pakaidiskon == "n"){
+                } else if(pakaidiskon == "n") {
                     harga = total(hargaperkg, jml);
                 } else {
                     cout << "pilihan tidak valid"<< endl;
