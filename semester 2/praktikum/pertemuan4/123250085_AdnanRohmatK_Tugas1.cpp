@@ -6,7 +6,7 @@ struct Senjata {
     string id_senjata;
     string nama_senjata;
     string tipe;
-    int base_damage;
+    double base_damage;
 };
 
 bool ulang = false;
@@ -16,7 +16,7 @@ void lihatSenjata(Senjata senjata[50], int *jmlSenjata);
 void tambahSenjata(Senjata senjata[50], int *jmlSenjata);
 void cariSenjata(Senjata senjata[50], int *jmlSenjata);
 
-int levelUp(int baseDamage, int levelSenjata);
+double levelUp(double baseDamage, int levelSenjata);
 
 int main() {
     Senjata senjata[50];
@@ -124,7 +124,7 @@ void tambahSenjata(Senjata senjata[50], int *jmlSenjata) {
 void cariSenjata(Senjata senjata[50], int *jmlSenjata) {
     int i = 0;
     int levelSenjata = 1;
-    int finalDamage;
+    double finalDamage;
     string id_pencarian;
     bool found = false;
 
@@ -168,10 +168,10 @@ void cariSenjata(Senjata senjata[50], int *jmlSenjata) {
     kembaliMenu();
 }
 
-int levelUp(int baseDamage, int levelSenjata) {
+double levelUp(double baseDamage, int levelSenjata) {
     if (levelSenjata == 1) return baseDamage;
     
-    int prevDamage = levelUp(baseDamage, levelSenjata - 1);
+    double prevDamage = levelUp(baseDamage, levelSenjata - 1);
 
     return prevDamage + (prevDamage * 0.10) + 50;
 }
