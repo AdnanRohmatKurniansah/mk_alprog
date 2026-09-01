@@ -1,0 +1,5 @@
+BK001 One_Piece Banyak 20 Adnan
+BK002 Gintama Tersedia 10 Rusdi
+BK003 Jujutsu_Kaisen Banyak 30 Ryu
+BK004 One_Punch Tersedia 5 Amba
+BK005 Naruto Tersedia 15 Shueisha

@@ -4,30 +4,13 @@ using namespace std;
 
 // Bubble Sort
 void bubbleSort(int array[], int size) {
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size - 1; i++) { 
         for (int j = 0; j < size - 1 - i; j++) {
             if (array[j] > array[j+1]) {
                 int temp = array[j];
                 array[j] = array[j+1];
                 array[j+1] = temp;
             }
-        }
-    }
-}
-
-// Selection Sort
-void selectionSort(int array[], int size) {
-    for (int i = 0; i < size - 1; i++) {
-        int minIndex = i;
-        for (int j = i + 1; j < size; j++) {
-            if (array[minIndex] > array[j]) {
-                minIndex = j;
-            }
-        }
-        if (minIndex != i) {
-            int temp = array[i];
-            array[i] = array[minIndex];
-            array[minIndex] = temp;
         }
     }
 }
@@ -42,6 +25,22 @@ void insertionSort(int array[], int size) {
             j--;
         }
         array[j + 1] = temp;
+    }
+}
+
+// Selection Sort
+void selectionSort(int array[], int size) {
+    int minIndex = -1;
+    for (int i = 0; i < size; i++) {
+        minIndex = i;
+        for (int j = i + 1; j < size; j++) {
+            if (array[minIndex] > array[j]) {
+                minIndex = j;
+            }
+        }
+        int temp = array[i];
+        array[i] = array[minIndex];
+        array[minIndex] = temp;
     }
 }
 
